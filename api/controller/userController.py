@@ -1,4 +1,4 @@
-from flask import Blueprint,request,make_response
+from flask import Blueprint,request
 from util.responses import error_response,success_response
 from service.userService import UserService
 from util.validation_methods import validate_email,validate_password,validate_username
@@ -11,9 +11,9 @@ def register():
         if request.is_json:
             data = request.get_json()
             if len(data) < 3:
-                return make_response(error_response(action="Register",error_code=400,error_message="missing one or more parameters"))
+                return error_response(action="Register",error_code=400,error_message="missing one or more parameters")
             elif "username" not in data or "email" not in data or "password" not in data:
-                return make_response(error_response(action="Register",error_code=400,error_message="request body must contains 'username', 'email' and 'password'"))
+                return error_response(action="Register",error_code=400,error_message="request body must contains 'username', 'email' and 'password'")
             else:
                 username = data.get("username")
                 email = data.get("email")
