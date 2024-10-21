@@ -19,17 +19,13 @@ def register():
                 email = data.get("email")
                 password = data.get("password")              
                 try:
-                    validate_username(username)
-                    validate_password(password)
-                    validate_email(email)
-                    userService.validate_new_username(username=username)
-                    userService.validate_new_email(email=email)     
+                    if userService.is_username_registered(username=username):
+                        return error_response(action="Register",error_message="Esse username já foi cadastrado",error_code=409)
+                    if userService.is_email_registered(email=email):
+                        return error_response(action="Register",error_message="Esse e-mail já foi cadastrado",error_code=409)
                     userService.add_new_user(username=username,email=email,password=password)
-                    return make_response(success_response(action="Register",code=201))           
+                    return success_response(action="Register",code=201)          
                 except Exception as err:
-                    if len(err.args) == 2:
-                        return make_response(error_response(action="Register",error_message=err.args[0],error_code=err.args[1]))
-                    else:
-                        return make_response(error_response(action="Register",error_message=str(err),error_code=500))
+                    return error_response(action="Register",error_message=str(err),error_code=500)
         else:                                                                            
-            return make_response(error_response(action="Register",error_message="missing request body",error_code=400))                                             
+            return error_response(action="Register",error_message="missing request body",error_code=400)                                           

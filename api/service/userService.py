@@ -15,9 +15,8 @@ class UserService:
         user = User(username=None,email=None,password=None)
         user.username = username         
         user.email = email         
-        user.password =  bcrypt.generate_password_hash(password).decode("utf-8")
-        print(user)         
-        userRepository.save(user)         
+        user.password =  bcrypt.generate_password_hash(password).decode("utf-8")         
+        userRepository.save(user)   
         return
 
     
@@ -40,24 +39,21 @@ class UserService:
         return user
 
 
-    def validate_new_username(self,username):
-        user = userRepository.get_by_username(username=username)
-        if user != None:
-            raise Exception("Esse Username já foi cadastrado!",409)
-        pass
+    def is_username_registered(self,username):
+        if userRepository.get_by_username(username=username):
+            return True
+        return False
+            
         
 
-    def validate_new_email(self,email):
-        user = userRepository.get_by_email(email=email)
-        if user != None:
-            raise Exception("Esse e-mail já foi cadastrado",409)
-        pass
+    def is_email_registered(self,email):
+        if userRepository.get_by_email(email=email):
+            return True
+        return False
+            
 
     #TODO:adicionar funcionalidade de pedir a senha
     def update_username(self,user_id,username):
-        user = userRepository.get_by_username(username=username)
-        if user != None:
-            raise Exception("Esse Username já foi cadastrado!",409)
         user = userRepository.get_by_id(user_id)
         if user == None:
             raise Exception("Usuário não encontrado ou não existe!",404)
@@ -67,9 +63,6 @@ class UserService:
     
     #TODO:adicionar funcionalidade de pedir a senha 
     def update_email(self,user_id,email):
-        user = userRepository.get_by_email(email=email)
-        if user != None:
-            raise Exception("Esse e-mail já foi cadastrado",409)
         user = userRepository.get_by_id(user_id)
         if user == None:
             raise Exception("Usuário não encontrado ou não existe!",404)

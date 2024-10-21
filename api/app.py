@@ -8,6 +8,7 @@ from sqlalchemy import DateTime, Column, Integer
 from sqlalchemy.sql import func
 from flask_migrate import Migrate
 
+
 class BaseModel(DeclarativeBase):
     id = Column(Integer, primary_key=True,autoincrement=True)
     time_created = Column(DateTime(timezone=True), server_default=func.now())
