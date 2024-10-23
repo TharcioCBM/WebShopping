@@ -19,6 +19,15 @@ def register():
                 email = data.get("email")
                 password = data.get("password")              
                 try:
+                    validate_response = validate_username(username)
+                    if validate_response:
+                        return error_response(action="Register",error_message=validate_response,error_code=400)
+                    validate_response = validate_email(email)
+                    if validate_response:
+                        return error_response(action="Register",error_message=validate_response,error_code=400)
+                    validate_response = validate_password(password)
+                    if validate_response:
+                        return error_response(action="Register",error_message=validate_response,error_code=400)
                     if userService.is_username_registered(username=username):
                         return error_response(action="Register",error_message="Esse username já foi cadastrado",error_code=409)
                     if userService.is_email_registered(email=email):
