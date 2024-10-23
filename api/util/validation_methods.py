@@ -18,7 +18,7 @@ def validate_password(password):
     pattern2 = re.compile('[a-z]+')
     pattern3 = re.compile('[A-Z]+')
     pattern4 = re.compile('[\W]+')
-    pattern5 = re.compile('.{8,}')
+    pattern5 = re.compile('.{4,}')
     if re.search(pattern=pattern,string=password):
         return "Não pode existir espaços vazios na senha"
     if not re.search(pattern=pattern2,string=password) or not re.search(pattern=pattern3,string=password):
@@ -26,6 +26,6 @@ def validate_password(password):
     if not re.search(pattern=pattern4,string=password):
         return "A senha deve conter pelo menos um símbolo"
     if not re.search(pattern=pattern5,string=password):
-        return "A senha deve conter no mínimo 8 caracteres"
+        return "A senha deve conter no mínimo 4 caracteres"
 
     
