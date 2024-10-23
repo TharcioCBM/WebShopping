@@ -52,7 +52,7 @@ Este projeto visa o desenvolvimento de uma plataforma de e-commerce simples, na 
 - Armazenamento seguro dos dados dos usuários, sem compartilhamento sem consentimento.
 
 ## Tecnologias Utilizadas
-- **Front-end**: HTML, CSS, JavaScript ()
+- **Front-end**: React, Next.js e Tailwind CSS.
 - **Back-end**: Python (Flask)
 - **Banco de Dados**: PostgreSQL
 - **Autenticação**: JWT (JSON Web Tokens)
