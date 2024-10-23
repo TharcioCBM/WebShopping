@@ -16,6 +16,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Migrations
+migrations
+.migrations
+
+
 #front-end
 #dependencies
 /node_modules
