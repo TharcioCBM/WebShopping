@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import ModalWrapper from '../../wrappers/ModalWrappers';
-//import EmailInput from '../../common/EmailInput';
 import CloseButton from '../../common/ClosedButton';
 
 
@@ -12,6 +12,7 @@ interface RegisterModalProps {
 }
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onLoginClick }) => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -32,11 +33,10 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onLoginClick }) 
       });
 
       if (res.ok) {
-        // Cadastro bem-sucedido
         const data = await res.json();
+        router.push('/')
         console.log(data.message);
       } else {
-        // Erro durante o cadastro
         const errorData = await res.json();
         setError(errorData.message);
       }
@@ -54,13 +54,11 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onLoginClick }) 
 
       <CloseButton onClose={onClose} />
 
-      {/* Título */}
       <h2 className="text-xl font-bold text-gray-800 mb-1">Bem-vindo ao markFree</h2>
       <p className="text-sm text-gray-500 mb-6">
         Seja bem-vindo ao nosso site de vendas online! Explore o melhor site de vendas online.
       </p>
 
-      {/* Formulário */}
       <form onSubmit={handleSubmit}>
 
         <div className="mb-4">
