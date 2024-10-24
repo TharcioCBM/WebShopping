@@ -1,4 +1,3 @@
-
 from model.user import User
 from repository.userRepository import UserRepository
 from app import bcrypt
@@ -20,19 +19,19 @@ class UserService:
         return
 
     
-    def findUserById(self,id):
+    def find_user_by_id(self,id):
         user = userRepository.get_by_id(id=id)
         if user == None:
             raise Exception("Usuário não encontrado ou não existe!",404)
         return user
     
-    def findUserByUsername(self,username):
+    def find_user_by_username(self,username):
         user = userRepository.get_by_username(username=username)
         if user == None:
             raise Exception("Usuário não encontrado ou não existe!",404)
         return user
     
-    def findUserByEmail(self,email):
+    def find_user_by_email(self,email):
         user = userRepository.get_by_email(email=email)
         if user == None:
             raise Exception("Usuário não encontrado ou não existe!",404)
@@ -79,6 +78,17 @@ class UserService:
         userRepository.update(user)
         return user
     
-
+    def authenticate_user(self,username,password):
+        user = userRepository.get_by_username(username=username)
+        if user == None:
+            return 
+        if not bcrypt.check_password_hash(user.password, password):
+            return 
+        user = {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email
+        }
+        return user
 
 
