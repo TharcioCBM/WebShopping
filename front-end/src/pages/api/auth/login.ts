@@ -1,22 +1,22 @@
-// app/api/auth/login.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {
-      const response = await fetch('http://127.0.0.1:5000/login', {
+      const { username, password } = req.body;
+
+      const response = await fetch('http://127.0.0.1:8080/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(req.body),
+        body: JSON.stringify({ username,password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Retorna o token JWT ou dados do usuário autenticado
-        res.status(200).json(data);
+        res.status(201).json(data);
       } else {
         res.status(response.status).json({ message: data.message });
       }
