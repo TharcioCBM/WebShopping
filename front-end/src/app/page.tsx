@@ -1,19 +1,13 @@
-import Head from 'next/head';
-import NavBar from '../app/components/NavBar';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
+import HomePage from './components/HomePage';
 
 export default function Home() {
   return (
-    <div>
-      <Head>
-        <title>MarkFree</title>
-        <meta name="description" content="Home page for markFree" />
-      </Head>
-
-      <NavBar />
-
-      <main className="container mx-auto py-10">
-        <p className="text-center text-gray-500"></p>
-      </main>
-    </div>
+    <>
+      <NavBar  />
+      <HomePage />
+      <Footer />
+    </>
   );
 }
