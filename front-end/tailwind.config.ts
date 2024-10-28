@@ -1,24 +1,13 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-<<<<<<< HEAD
-  content: [
-=======
     darkMode: ["class"],
     content: [
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-<<<<<<< HEAD
-    extend: {
-      
-    },
-  },
-  plugins: [],
-=======
   	extend: {
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -70,6 +59,5 @@ const config: Config = {
   	}
   },
   plugins: [require("tailwindcss-animate")],
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
 };
 export default config;

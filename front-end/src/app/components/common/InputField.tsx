@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-// components/InputField.tsx
-import React from 'react';
-=======
 import React from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
 
 interface InputFieldProps {
   id: string;
@@ -13,11 +8,6 @@ interface InputFieldProps {
   type: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-<<<<<<< HEAD
-}
-
-const InputField: React.FC<InputFieldProps> = ({ id, label, placeholder, type, value, onChange }) => {
-=======
   showPassword?: boolean; // Para controle de visualização de senha
   togglePasswordVisibility?: () => void; // Função para alternar o ícone
 }
@@ -32,22 +22,11 @@ const InputField: React.FC<InputFieldProps> = ({
   showPassword = false, // Define se é um campo de senha
   togglePasswordVisibility // Função para alternar visibilidade
 }) => {
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
   return (
     <div className="mb-4">
       <label htmlFor={id} className="block text-gray-700 text-sm font-medium mb-1">
         {label}
       </label>
-<<<<<<< HEAD
-      <input
-        type={type}
-        id={id}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      />
-=======
       <div className="relative">
         <input
           type={type === 'password' && showPassword ? 'text' : type}
@@ -68,7 +47,6 @@ const InputField: React.FC<InputFieldProps> = ({
           </button>
         )}
       </div>
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
     </div>
   );
 };

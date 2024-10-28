@@ -22,13 +22,6 @@ def create_app():
 
     app = Flask(__name__)
     app.config.from_object(DevelopmentConfig)
-<<<<<<< HEAD
-    bcrypt.init_app(app)
-    db.init_app(app)
-    migrate.init_app(app, db)
-    from controller.userController import user_bp
-    app.register_blueprint(user_bp)
-=======
     
     bcrypt.init_app(app)
     db.init_app(app)
@@ -37,5 +30,4 @@ def create_app():
     from controller.userController import user_bp
     app.register_blueprint(user_bp)
 
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
     return app

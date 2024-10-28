@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
 from model.user import User
 from repository.userRepository import UserRepository
 from app import bcrypt
@@ -23,31 +19,19 @@ class UserService:
         return
 
     
-<<<<<<< HEAD
-    def findUserById(self,id):
-=======
     def find_user_by_id(self,id):
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
         user = userRepository.get_by_id(id=id)
         if user == None:
             raise Exception("Usuário não encontrado ou não existe!",404)
         return user
     
-<<<<<<< HEAD
-    def findUserByUsername(self,username):
-=======
     def find_user_by_username(self,username):
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
         user = userRepository.get_by_username(username=username)
         if user == None:
             raise Exception("Usuário não encontrado ou não existe!",404)
         return user
     
-<<<<<<< HEAD
-    def findUserByEmail(self,email):
-=======
     def find_user_by_email(self,email):
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
         user = userRepository.get_by_email(email=email)
         if user == None:
             raise Exception("Usuário não encontrado ou não existe!",404)
@@ -94,9 +78,6 @@ class UserService:
         userRepository.update(user)
         return user
     
-<<<<<<< HEAD
-
-=======
     def authenticate_user(self,username,password):
         user = userRepository.get_by_username(username=username)
         if user == None:
@@ -109,6 +90,5 @@ class UserService:
             "email": user.email
         }
         return user
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
 
 
