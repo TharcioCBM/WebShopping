@@ -1,6 +1,6 @@
 from flask import Blueprint,request,current_app
 from util.responses import error_response,success_response
-from service.userService import UserService
+from service.user_service import UserService
 from util.validation_methods import validate_email,validate_password,validate_username
 import jwt
 
