@@ -23,3 +23,4 @@ class BaseRepository:
         
     def get_all(self):
         return db.session.scalars(db.select(self.model)).fetchmany()
+    
