@@ -11,3 +11,5 @@ Flask-Migrate==4.0.7
 psycopg2-binary==2.9.10
 #environment
 python-dotenv==1.0.1
+#JSON Web Tokens (JWT)
+PyJWT==2.9.0

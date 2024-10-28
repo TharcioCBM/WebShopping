@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 // components/LoginModal.tsx
 import React, { useState } from 'react';
 import Wrapper from '../../wrappers/ModalWrappers';
 import CloseButton from '../../common/ClosedButton';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { FaEye, FaEyeSlash  } from 'react-icons/fa';
+=======
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Wrapper from '../../wrappers/ModalWrappers';
+import CloseButton from '../../common/ClosedButton';
+import InputField from '../../common/InputField';
+import ActionButton from '../../common/ActionButton';
+>>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
 
 interface LoginModalProps {
   onClose: () => void;
@@ -11,6 +20,7 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => {
+<<<<<<< HEAD
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -19,11 +29,54 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => 
       <CloseButton onClose={onClose} />
 
       {/* Título e subtítulo */}
+=======
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        localStorage.setItem('token', data.token);
+        router.push('/');
+        console.log(data.message);
+      } else {
+        const errorData = await res.json();
+        setError(errorData.error_message || 'Usuário e/ou senha inválidos');
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err) {
+      setError('Erro ao conectar ao servidor.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Wrapper>
+      <CloseButton onClose={onClose} />
+
+>>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
       <h2 className="text-2xl font-bold text-gray-900 mb-1">Bem-vindo ao markFree</h2>
       <p className="text-sm text-gray-500 mb-5">
         Seja bem-vindo ao nosso site de vendas online! Explore o melhor site de vendas online
       </p>
 
+<<<<<<< HEAD
       {/* Formulário de Login */}
       <form>
         {/* Campo de Email */}
@@ -63,11 +116,36 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => 
               )}
             </button>
           </div>
+=======
+      <form onSubmit={handleSubmit}>
+        <InputField
+          id="username"
+          label="Usuário"
+          placeholder="ex.: tercio@email.com"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <div className="mb-2">
+          <InputField
+            id="password"
+            label="Senha"
+            placeholder="Digite sua senha"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            showPassword={showPassword}
+            togglePasswordVisibility={() => setShowPassword(!showPassword)}
+          />
+
+>>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
           <a href="#" className="text-sm text-gray-500 hover:text-gray-800 mt-1 block">
             Esqueceu a senha
           </a>
         </div>
 
+<<<<<<< HEAD
         {/* Botão de Login */}
         <button
           type="submit"
@@ -96,6 +174,22 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => 
       {/* Link para registro */}
       <p className="w-full flex items-center justify-center text-sm text-gray-500 mt-5">
         Não tem conta? {' '}
+=======
+
+
+        <ActionButton
+          label={loading ? 'Logando...' : 'Login'}
+          type="submit"
+          variant="primary"
+          onClick={handleSubmit}
+        />
+
+        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+      </form>
+
+      <p className="w-full flex items-center justify-center text-sm text-gray-500 mt-5">
+        Não tem conta?{' '}
+>>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
         <a href="#" className="text-indigo-500 hover:text-indigo-700" onClick={onRegisterClick}>
           cadastre-se
         </a>

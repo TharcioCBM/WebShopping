@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // pages/index.tsx
 "use client";
 import Head from 'next/head';
@@ -61,3 +62,18 @@ export default function Home() {
     </div>
   );
 }
+=======
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
+import HomePage from './components/HomePage';
+
+export default function Home() {
+  return (
+    <>
+      <NavBar  />
+      <HomePage />
+      <Footer />
+    </>
+  );
+}
+>>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab

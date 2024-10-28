@@ -1,0 +1,246 @@
+[
+	{
+		"id": 1,
+		"name": "Samsung Galaxy A15 Dual SIM 4G 256GB Azul",
+		"description": "Samsung Galaxy A15 Dual SIM com 4G e 256GB de armazenamento, cor Azul.",
+		"images": [
+			{
+				"id": 1,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_668543-MLA75547177771_042024-O.webp",
+				"name": "Samsung Galaxy A15 Azul 1"
+			},
+      {
+				"id": 2,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_813772-MLA74296781108_022024-O.webp",
+				"name": "Samsung Galaxy A15 Azul 2"
+			},
+      {
+				"id": 3,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_925720-MLA74297165466_022024-O.webp",
+				"name": "Samsung Galaxy A15 Azul 3"
+			}
+		],
+		"category": "smartphones",
+		"price": 1037.56,
+		"old_price": 1250.00,
+		"discount": 17,
+		"shipping": "Frete grátis",
+		"rating": 4.5,
+		"specifications": {
+			"network": "4G",
+			"screen": "6.5' Super AMOLED",
+			"rear_camera": "50MP",
+			"front_camera": "13MP",
+			"battery": "5000mAh",
+			"memory": "4GB RAM, 256GB armazenamento",
+			"color": "Azul"
+		}
+	},
+	{
+		"id": 2,
+		"name": "Smartphone Motorola Moto G34 5G 256GB Verde",
+		"description": "Motorola Moto G34 com 5G e 256GB de armazenamento, cor Verde.",
+		"images": [
+			{
+				"id": 1,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_745791-MLU78216721078_082024-O.webp",
+				"name": "Motorola Moto G34 Verde 1"
+			},
+      {
+				"id": 2,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_942161-MLU78216721112_082024-O.webp",
+				"name": "Motorola Moto G34 Verde traseira"
+			},
+      {
+				"id": 3,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_638732-MLU75183318154_032024-O.webp",
+				"name": "Motorola Moto G34 Verde 1"
+			}
+		],
+		"category": "smartphones",
+		"price": 1004.34,
+		"old_price": 1200.00,
+		"discount": 34,
+		"shipping": "Frete grátis",
+		"rating": 4.6,
+		"specifications": {
+			"network": "5G",
+			"screen": "6.6' Super AMOLED",
+			"rear_camera": "50MP",
+			"front_camera": "16MP",
+			"battery": "5000mAh",
+			"memory": "6GB RAM, 256GB armazenamento",
+			"color": "Verde"
+		}
+	},
+	{
+		"id": 3,
+		"name": "Xiaomi Redmi Note 12 4G Dual SIM 256GB Azul-Gelo",
+		"description": "Xiaomi Redmi Note 12 4G Dual SIM com 256GB de armazenamento, cor Azul-Gelo e 8GB RAM.",
+		"images": [
+			{
+				"id": 1,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_792546-MLA74179807568_012024-O.webp",
+				"name": "Xiaomi Redmi Note 12 Azul-Gelo 1"
+			}
+		],
+		"category": "smartphones",
+		"price": 1297.00,
+		"old_price": 1500.00,
+		"discount": 14,
+		"shipping": "Frete grátis",
+		"rating": 4.7,
+		"specifications": {
+			"network": "4G",
+			"screen": "6.67' AMOLED",
+			"rear_camera": "108MP",
+			"front_camera": "13MP",
+			"battery": "5000mAh",
+			"memory": "8GB RAM, 256GB armazenamento",
+			"color": "Azul-Gelo"
+		}
+	},
+	{
+		"id": 4,
+		"name": "Notebook Gamer Acer Predator Triton i7 512GB",
+		"description": "Notebook Gamer Acer Predator Triton com processador Core i7 e 512GB de armazenamento.",
+		"images": [
+			{
+				"id": 1,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_726219-MLU72561634585_102023-O.webp",
+				"name": "Notebook Gamer Acer Predator Triton 1"
+			},
+      {
+				"id": 2,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_954959-MLU72492879804_102023-O.webp",
+				"name": "Notebook Gamer Acer Predator Triton 2"
+			},
+      {
+				"id": 3,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_715555-MLU72561634603_102023-O.webp",
+				"name": "Notebook Gamer Acer Predator Triton 3"
+			}
+		],
+		"category": "notebooks",
+		"price": 7599.00,
+		"old_price": 14999.00,
+		"discount": 49,
+		"shipping": "Frete grátis",
+		"rating": 4.8,
+		"specifications": {
+			"processor": "Intel Core i7",
+			"screen": "15.6' FHD",
+			"memory": "16GB RAM, 512GB SSD",
+			"graphics": "RTX 3070",
+			"color": "Preto"
+		}
+	},
+	{
+		"id": 5,
+		"name": "Notebook Gamer Dell G15 i5 512GB",
+		"description": "Notebook Gamer Dell G15 com processador Core i5 e 512GB de armazenamento.",
+		"images": [
+			{
+				"id": 1,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_802287-MLU78987693102_092024-O.webp",
+				"name": "Notebook Gamer Dell G15"
+			},
+			{
+				"id": 2,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_739344-MLU78987693104_092024-O.webp",
+				"name": "Notebook Gamer Dell G15 frente"
+			},
+			{
+				"id": 3,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_946954-MLU78987693154_092024-O.webp",
+				"name": "Notebook Gamer Dell G15 banner"
+			}
+		],
+		"category": "notebooks",
+		"price": 5698.00,
+		"old_price": 7999.00,
+		"discount": 43,
+		"shipping": "Frete grátis",
+		"rating": 4.6,
+		"specifications": {
+			"processor": "Intel Core i5",
+			"screen": "15.6' FHD",
+			"memory": "8GB RAM, 512GB SSD",
+			"graphics": "RTX 3050",
+			"color": "Cinza"
+		}
+	},
+	{
+		"id": 6,
+		"name": "Notebook Gamer Acer Nitro 5 i5 8GB RAM",
+		"description": "Notebook Gamer Acer Nitro 5 com processador Core i5, 8GB de RAM e 512GB de armazenamento.",
+		"images": [
+			{
+				"id": 1,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_757417-MLU76569758316_062024-O.webp",
+				"name": "Notebook Gamer Acer Nitro 5 frente"
+			},
+			{
+				"id": 2,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_829929-MLU76569640662_062024-O.webp",
+				"name": "Notebook Gamer Acer Nitro 5 horizontal"
+			},
+			{
+				"id": 3,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_842236-MLU76569640668_062024-O.webp",
+				"name": "Notebook Gamer Acer Nitro 5 lateral"
+			}
+		],
+		"category": "notebooks",
+		"price": 5399.00,
+		"old_price": 6399.00,
+		"discount": 16,
+		"shipping": "Frete grátis",
+		"rating": 4.7,
+		"specifications": {
+			"processor": "Intel Core i5",
+			"screen": "15.6' FHD",
+			"memory": "8GB RAM, 512GB SSD",
+			"graphics": "RTX 3050",
+			"color": "Preto"
+		}
+	},
+	{
+		"id": 7,
+		"name": "Samsung Galaxy A25 5G Dual SIM 256GB Verde Claro 8GB RAM",
+		"description": "Com o Samsung Galaxy A25 5G de 256GB de armazenamento, você terá em mãos um smartphone poderoso e versátil, com tecnologia 5G e desempenho ágil.",
+		"images": [
+			{
+				"id": 1,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_886358-MLA79983835183_102024-O.webp",
+				"name": "Samsung Galaxy A25 5G Frente"
+			},
+			{
+				"id": 2,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_895584-MLA79727741653_102024-O.webp",
+				"name": "Samsung Galaxy A25 5G Traseira"
+			},
+			{
+				"id": 3,
+				"url": "https://http2.mlstatic.com/D_NQ_NP_952239-MLA79480834218_102024-O.webp",
+				"name": "Samsung Galaxy A25 5G Lateral"
+			}
+		],
+		"category": "smartphones",
+		"price": 1281.00,
+		"old_price": 2248.00,
+		"discount": 43,
+		"shipping": "Frete grátis",
+		"rating": 4.8,
+		"specifications": {
+			"network": "5G",
+			"screen": "6.5' Super AMOLED",
+			"rear_camera": "50MP + 8MP + 2MP",
+			"front_camera": "13MP",
+			"battery": "5000mAh",
+			"memory": "8GB RAM, 256GB armazenamento",
+			"processor": "Exynos 1280 2.4GHz",
+			"color": "Verde Claro"
+		}
+	}
+]
