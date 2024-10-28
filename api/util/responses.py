@@ -20,7 +20,11 @@ def success_response(action,status=None,parameter=None,token=None,code=None):
         "status": "executed" if status == None else status
     }
     if parameter != None:
+<<<<<<< HEAD
+        response_data["requested_data"] = parameter
+=======
         response_data["request_data"] = parameter
+>>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
     
     if token != None:
         response_data["token"] = token

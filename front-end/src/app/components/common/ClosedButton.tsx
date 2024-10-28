@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+// components/CloseButton.tsx
+=======
+>>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 
