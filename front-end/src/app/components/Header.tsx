@@ -9,9 +9,12 @@ const Header: React.FC<HeaderProps> = ({ onRegisterClick }) => {
   return (
     <header className="bg-white shadow-sm py-4">
       <div className="container mx-auto flex items-center justify-between px-4">
+        {/* Logo */}
         <div className="text-2xl font-bold text-gray-800">
           MarkFree
         </div>
+
+        {/* Barra de Pesquisa */}
         <div className="relative flex-grow mx-8 max-w-lg">
           <input
             type="text"
