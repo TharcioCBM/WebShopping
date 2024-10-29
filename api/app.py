@@ -1,4 +1,3 @@
-import os
 from flask import Flask
 from config import DevelopmentConfig
 from flask_bcrypt import Bcrypt
@@ -27,7 +26,9 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from controller.userController import user_bp
+    from controller.user_controller import user_bp
     app.register_blueprint(user_bp)
+    from controller.product_controller import product_bp
+    app.register_blueprint(product_bp)
 
     return app

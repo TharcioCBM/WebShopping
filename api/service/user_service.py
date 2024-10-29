@@ -1,5 +1,5 @@
 from model.user import User
-from repository.userRepository import UserRepository
+from repository.user_repository import UserRepository
 from app import bcrypt
 
 
