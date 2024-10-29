@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react'
 import Image from 'next/image'
 import { Card, CardContent } from "@/components/ui/card"
@@ -8,8 +9,7 @@ interface Product {
   id: string;
   name: string;
   price: number;
-  old_price: number;
-  discount: number;
+  offer: number;
   images: { url: string }[];
   shipping: string;
   description: string;
@@ -65,7 +65,7 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
               <CardContent className="p-4">
                 <div className="aspect-square relative mb-4 flex items-center justify-center">
                   <Image
-                    src={product.images[0].url}
+                    src={product.images[0]}
                     alt={product.name}
                     layout="fixed"
                     width={96}
@@ -77,16 +77,16 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
                 <p className="text-xs text-gray-600 mb-2 line-clamp-2">{product.description}</p>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 line-through">
-                    R$ {product.old_price.toFixed(2)}
-                  </span>
-                  <span className="text-sm font-bold">
                     R$ {product.price.toFixed(2)}
                   </span>
+                  <span className="text-sm font-bold">
+                    R$ {(product.price * (1 - (product.offer / 100))).toFixed(2)}
+                  </span>
                   <span className="text-xs font-semibold text-green-600">
-                    {product.discount}% OFF
+                    {product.offer}% OFF
                   </span>
                   <span className="text-xs text-green-600">
-                    {product.shipping}
+                    {product.shipping== '' ? 'Frete Grátis' : 'Frete R$ 10,00'}
                   </span>
                 </div>
               </CardContent>
@@ -98,7 +98,7 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
           size="icon"
           className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1/2 bg-white"
           onClick={prevProduct}
-          aria-label="Previous product"
+          aria-label="Previous product" 
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>

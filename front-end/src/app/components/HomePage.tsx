@@ -10,10 +10,27 @@ const Home: React.FC = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('/products.json')
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error('Erro ao carregar os produtos', error));
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch('api/products/products', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setProducts(data.request_data.products);
+          console.log(data);
+        } else {
+          console.error('Erro ao buscar produtos:', res.statusText);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+      }
+    };
+    fetchProducts();
   }, []);
 
   return (
@@ -24,7 +41,7 @@ const Home: React.FC = () => {
       <div className="bg-transparent container mx-auto pt-0 px-0 pb-8 min-h-screen w-full flex flex-col">
         <FeaturedProductsSection products={products} />
         <AdvertisingBanners />
-        <OfertasSection />
+        <OfertasSection products={products}  />
         <CategoriesSection />
       </div>
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react'
 import Image from 'next/image'
 import { Card, CardContent } from "@/components/ui/card"
@@ -5,64 +6,20 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 interface Product {
-  id: number
-  name: string
-  description: string
-  image: string
-  originalPrice: number
-  discountedPrice: number
-  discountPercentage: number
+  id: string;
+  name: string;
+  price: number;
+  offer: number;
+  images: { url: string }[];
+  shipping: string;
+  description: string;
 }
 
-const products: Product[] = [
-  {
-    id: 1,
-    name: "Caixa De Som JBL Go 3",
-    description: "Portátil Bluetooth 4.2w À Prova D'água E poeira Cor Preto",
-    image: "https://http2.mlstatic.com/D_NQ_NP_814465-MLA79345006240_092024-O.webp",
-    originalPrice: 249.99,
-    discountedPrice: 220,
-    discountPercentage: 8
-  },
-  {
-    id: 2,
-    name: "Samsung Smart TV 50'",
-    description: "UHD 4K 50DU7700 2024 Processador Crystal 4K Gaming...",
-    image: "https://http2.mlstatic.com/D_NQ_NP_700507-MLU78160025232_082024-O.webp",
-    originalPrice: 3999,
-    discountedPrice: 2399,
-    discountPercentage: 40
-  },
-  {
-    id: 3,
-    name: "Smart Tv LG Led 65",
-    description: "65UR871C0SA AI Thinq Led 4k 65 100v 240v Preto",
-    image: "https://http2.mlstatic.com/D_NQ_NP_884778-MLU77355786759_062024-O.webp",
-    originalPrice: 5499.94,
-    discountedPrice: 3086.55,
-    discountPercentage: 43
-  },
-  {
-    id: 4,
-    name: "Fritadeira Air Fryer",
-    description: "Pfr15pg Gourmet 4,4l Black Philco 127v",
-    image: "https://http2.mlstatic.com/D_NQ_NP_676762-MLU74978646295_032024-O.webp",
-    originalPrice: 474.60,
-    discountedPrice: 299.90,
-    discountPercentage: 36
-  },
-  {
-    id: 5,
-    name: "Fone de ouvido sem fio",
-    description: "JBL Tune 520BT Dobrável Preto",
-    image: "https://http2.mlstatic.com/D_NQ_NP_986177-MLU73187129209_122023-O.webp",
-    originalPrice: 324,
-    discountedPrice: 227.49,
-    discountPercentage: 29
-  },
-]
+interface ofertasSectionSectionProps {
+  products: Product[];
+}
 
-export default function OfertasSection() {
+export default function OfertasSection({products }: ofertasSectionSectionProps) {
   const [startIndex, setStartIndex] = useState(0)
 
   const nextProduct = () => {
@@ -86,7 +43,7 @@ export default function OfertasSection() {
                 <CardContent className="p-4">
                   <div className="aspect-square relative mb-4">
                     <Image
-                      src={product.image}
+                      src={product.images[0]}
                       alt={product.name}
                       layout="fill"
                       objectFit="contain"
@@ -97,13 +54,13 @@ export default function OfertasSection() {
                   <p className="text-xs text-gray-600 mb-2 line-clamp-2">{product.description}</p>
                   <div className="flex flex-col">
                     <span className="text-xs text-gray-500 line-through">
-                      R$ {product.originalPrice.toFixed(2)}
+                    R$ {product.price.toFixed(2)}
                     </span>
                     <span className="text-sm font-bold">
-                      R$ {product.discountedPrice.toFixed(2)}
+                    R$ {(product.price * (1 - (product.offer / 100))).toFixed(2)}
                     </span>
                     <span className="text-xs font-semibold text-green-600">
-                      {product.discountPercentage}% OFF
+                      {product.offer}% OFF
                     </span>
                     <span className="text-xs text-green-600">
                       Frete grátis
