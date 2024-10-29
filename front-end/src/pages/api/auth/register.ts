@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// src/app/api/auth/register.ts
-=======
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function register(req: NextApiRequest, res: NextApiResponse) {
@@ -9,10 +5,6 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
     try {
       const { username, email, password } = req.body;
 
-<<<<<<< HEAD
-      // Realiza a requisição POST para a API do Flask
-=======
->>>>>>> 3c7f000343a1c14e34d741b6ddf9981fdd41a9ab
       const response = await fetch('http://127.0.0.1:8080/users', {
         method: 'POST',
         headers: {
