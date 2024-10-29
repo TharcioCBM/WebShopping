@@ -30,5 +30,7 @@ def create_app():
     app.register_blueprint(user_bp)
     from controller.product_controller import product_bp
     app.register_blueprint(product_bp)
+    from controller.category_controller import category_bp
+    app.register_blueprint(category_bp)
 
     return app
