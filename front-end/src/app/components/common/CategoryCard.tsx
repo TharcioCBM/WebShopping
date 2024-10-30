@@ -17,7 +17,7 @@ interface CategoryCardProps {
 
 export function CategoryCard({ id, description, url_image }: CategoryCardProps) {
   return (
-    <Link href={`/categories/${id}`} className="block">
+    <Link href={`/searchResults?category=${id}&name=${description}`}>
       <Card className="rounded border hover:shadow-md transition-shadow duration-200">
         <CardContent className="flex items-center p-4 space-x-4">
           <Image src={url_image} alt={description} width={40} height={40} className="flex-shrink-0" />
@@ -47,10 +47,10 @@ export default function CategoriesSection() {
           const data = await res.json();
           setCategories(data.request_data || []);
         } else {
-          console.error('Erro ao buscar produtos:', res.statusText);
+          console.error('Erro ao buscar categorias:', res.statusText);
         }
       } catch (error) {
-        console.error('Erro ao buscar produtos:', error);
+        console.error('Erro ao buscar categorias:', error);
       } finally {
         setIsLoading(false);
       }
