@@ -34,3 +34,20 @@ def get_offer():
             return error_response(action="GET Product",error_message="Produto não encontrada ou não existe!",error_code=404)
     except Exception as err:
         return error_response(action="GET Product",error_message=str(err),error_code=500)
+    
+@product_bp.route("/s",methods=["GET"])
+def product_search():
+    limit = request.args.get('limit') if  "limit" in request.args and request.args.get('limit').isdigit() else 20
+    offset = request.args.get('offset') if "offset" in request.args and request.args.get('offset').isdigit() else 1
+    if int(limit) < 1 or int(offset) < 1:
+        return error_response(action="GET product search",error_message="limit and offset cannot be less than one",error_code=400)
+    if request.args:
+        keyword = request.args.get('k')
+        #TODO category = request.args.get('category')
+        try:
+            products_page = product_service.search_products(limit=limit,offset=offset,keyword=keyword)
+            return success_response(action="GET Product",parameter=products_page)
+        except Exception as err:
+            return error_response(action="GET product search",error_message=str(err),error_code=500)
+    else:
+        return error_response(action="GET product search",error_message="no keywords were passed",error_code=400)
