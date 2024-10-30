@@ -1,45 +1,87 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { Card, CardContent } from "@/components/ui/card"
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Card, CardContent } from "@/components/ui/card";
 
-interface CategoryCardProps {
-  icon: string
-  name: string
-  href: string
+interface Category {
+  id: number;
+  description: string;
+  url_image: string;
 }
 
-export function CategoryCard({ icon, name, href }: CategoryCardProps) {
+interface CategoryCardProps {
+  id: number;
+  description: string;
+  url_image: string;
+}
+
+export function CategoryCard({ id, description, url_image }: CategoryCardProps) {
   return (
-    <Link href={href} className="block">
+    <Link href={`/categories/${id}`} className="block">
       <Card className="rounded border hover:shadow-md transition-shadow duration-200">
         <CardContent className="flex items-center p-4 space-x-4">
-          <Image src={icon} alt="" width={40} height={40} className="flex-shrink-0" />
-          <span className="text-sm font-medium text-gray-700">{name}</span>
+          <Image src={url_image} alt={description} width={40} height={40} className="flex-shrink-0" />
+          <span className="text-sm font-medium text-gray-700">{description}</span>
         </CardContent>
       </Card>
     </Link>
-  )
+  );
 }
 
-const categories = [
-  { icon: "https://http2.mlstatic.com/storage/homes-korriban/assets/icons/xxhdpi/home_mobile-button-category.webp", name: "Celulares e Telefones", href: "/categoria/celulares-telefones" },
-  { icon: "https://http2.mlstatic.com/storage/homes-korriban/assets/icons/xxhdpi/home_oven-category.webp", name: "Eletrodoméstico", href: "/categoria/eletrodomestico" },
-  { icon: "https://http2.mlstatic.com/storage/homes-korriban/assets/icons/xxhdpi/home_tv-2-category.webp", name: "Informática", href: "/categoria/informatica" },
-  { icon: "https://http2.mlstatic.com/storage/homes-korriban/assets/icons/xxhdpi/home_audio-92-category.webp", name: "Eletrônicos, Áudio e Vídeo", href: "/categoria/eletronicos-audio-video" },
-  { icon: "https://www.pinpng.com/pngs/m/341-3417282_modelo-camisa-branca-png-plain-white-v-neck.png", name: "Calçados, Roupas e Bolsas", href: "/categoria/calcados-roupas-bolsas" },
-]
-
 export default function CategoriesSection() {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch('/api/categories/categories', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setCategories(data.request_data || []);
+        } else {
+          console.error('Erro ao buscar produtos:', res.statusText);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
+
   return (
     <section className="rounded-lg py-5 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-2xl font-bold mb-4">Categorias</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {categories.map((category) => (
-            <CategoryCard key={category.name} {...category} />
-          ))}
+          {isLoading ? (
+            Array.from({ length: 5 }).map((_, index) => (
+              <Card key={index} className="rounded border shadow-lg p-4 animate-pulse">
+                <CardContent className="flex items-center p-4 space-x-4">
+                  <div className="w-10 h-8 bg-gray-300 rounded-full"></div> 
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 bg-gray-300 rounded w-3/4"></div> 
+                    <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          ) : (
+            categories.map((category) => (
+              <CategoryCard key={category.id} id={category.id} description={category.description} url_image={category.url_image} />
+            ))
+          )}
         </div>
       </div>
     </section>
-  )
+  );
 }
