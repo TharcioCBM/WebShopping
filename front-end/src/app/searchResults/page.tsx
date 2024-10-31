@@ -28,7 +28,7 @@ export default function SearchResults() {
     useEffect(() => {
         const fetchProducts = async () => {
 
-            if(categoryId){
+            if (categoryId) {
                 try {
                     const res = await fetch('/api/categories/searchCategories', {
                         method: 'GET',
@@ -48,7 +48,7 @@ export default function SearchResults() {
                     console.error('Error fetching products:', error);
                 }
             }
-            
+
             else if (searchQuery) {
                 try {
                     console.log(searchQuery)
@@ -80,22 +80,30 @@ export default function SearchResults() {
         }
     }, [categoryId, searchQuery]);
 
+    const maxProductsToShow = 12;
+
     return (
-        <div className="h-full">
-            <div className="container bg-transparent mx-auto px-4 py-8">
+        <div className="w-full h-full">
+            <div className="w-full bg-transparent p-0">
                 <div className="bg-sky-950  p-8">
+                    <button
+                        onClick={() => window.history.back()}
+                        className="text-white underline mb-2"
+                    >
+                        Voltar
+                    </button>
                     <h1 className="text-2xl text-white font-normal">
                         Pesquisa por: <span className="text-slate-100 font-semibold">{categoryName || searchQuery}</span>
                     </h1>
                 </div>
 
                 <div className="bg-transparent p-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  justify-items-center">
                         {productsData.map((product) => (
-                            <Link className='max-w-[300px]' href={`/product/${product.id}`} key={product.id}>
+                            <Link className='w-full max-w-[250px] h-full' href={`/product/${product.id}`} key={product.id}>
                                 <Card className="rounded-lg hover:shadow-lg transition-shadow duration-200 w-full max-w-sm">
-                                    <CardContent className="p-4">
-                                        <div className="aspect-square relative mb-4">
+                                    <CardContent className="p-4 flex flex-col h-full">
+                                        <div className="aspect-square relative mb-4 w-full">
                                             <Image
                                                 src={product.images[0]}
                                                 alt={product.name}
@@ -104,37 +112,39 @@ export default function SearchResults() {
                                                 className="rounded-lg"
                                             />
                                         </div>
-                                        <h2 className="text-base font-medium text-gray-900 mb-2 line-clamp-2">
-                                            {product.name}
-                                        </h2>
-                                        <p className="text-xs text-gray-600 mb-2 line-clamp-2">{product.description}</p>
-                                        <div className="space-y-1">
-                                            <p className="text-sm text-gray-500 line-through">
-                                                R$ {product.price.toFixed(2)}
-                                            </p>
-                                            <p className="text-lg font-bold text-gray-900">
-                                                R$ {(product.price * (1 - (product.offer / 100))).toFixed(2)}
-                                            </p>
-                                            <p className="text-sm font-medium text-green-600">
-                                                {product.offer}% OFF
-                                            </p>
-                                        </div>
-                                    </CardContent>
-                                </Card>
+                                    <h2 className="text-base font-medium text-gray-900 mb-2 line-clamp-2 min-h-[40px]">
+                                        {product.name}
+                                    </h2>
+                                    <p className="text-xs text-gray-600 mb-2 line-clamp-2 min-h-[32px]">{product.description}</p>
+                                    <div className=" mt-auto space-y-1">
+                                        <p className="text-sm text-gray-500 line-through">
+                                            R$ {product.price.toFixed(2)}
+                                        </p>
+                                        <p className="text-lg font-bold text-gray-900">
+                                            R$ {(product.price * (1 - (product.offer / 100))).toFixed(2)}
+                                        </p>
+                                        <p className="text-sm font-medium text-green-600">
+                                            {product.offer}% OFF
+                                        </p>
+                                    </div>
+                                </CardContent>
+                            </Card>
                             </Link>
                         ))}
-                    </div>
-
-                    <div className="mt-8 text-center">
-                        <Link
-                            href="/search/all"
-                            className="inline-block px-6 py-3 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
-                        >
-                            Ver todos os resultados
-                        </Link>
-                    </div>
                 </div>
+
+                {productsData.length > maxProductsToShow && (
+                        <div className="mt-8 text-center">
+                            <Link
+                                href="/search/all"
+                                className="inline-block px-6 py-3 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                            >
+                                Ver todos os resultados
+                            </Link>
+                        </div>
+                    )}
             </div>
         </div>
+        </div >
     )
 }

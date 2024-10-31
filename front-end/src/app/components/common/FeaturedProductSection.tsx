@@ -57,13 +57,13 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
           {products.map((product, index) => (
             <Card
               key={product.id}
-              className="rounded-lg border w-full max-w-[250px] flex-shrink-0 transition-transform duration-300 ease-in-out"
+              className="rounded-lg border w-full max-w-[250px] h-full flex-shrink-0 transition-transform duration-300 ease-in-out"
               style={{
                 transform: `translateX(-${startIndex * 254}px)`
               }}
             >
-              <CardContent className="p-4">
-                <div className="aspect-square relative mb-4 flex items-center justify-center">
+              <CardContent className="p-4 flex flex-col h-full">
+                <div className="aspect-square relative mb-4 w-full flex items-center justify-center">
                   <Image
                     src={product.images[0]}
                     alt={product.name}

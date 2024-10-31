@@ -16,7 +16,6 @@ export default function FeaturedBanner() {
     >
       <CardContent className="p-0">
         <div className="flex flex-col lg:flex-row items-stretch relative">
-          {/* Left Content Section */}
           <motion.div 
             className="w-full lg:w-1/2 p-6 lg:p-12 bg-gradient-to-br from-blue-950 via-indigo-900 to-indigo-700 text-white flex flex-col justify-center"
             initial={{ opacity: 0, x: -50 }}
