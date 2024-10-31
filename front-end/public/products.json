@@ -1,0 +1,106 @@
+[{
+		"id": 8, 
+		"name": "Caixa De Som JBL Go 3",
+		"description": "Portátil Bluetooth 4.2w À Prova D'água E poeira Cor Preto",
+		"images": [
+			{
+                "id": 1,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_814465-MLA79345006240_092024-O.webp"
+			},
+			{
+				"id": 2,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_814465-MLA79345006240_092024-O.webp"
+			},
+			{
+				"id": 3,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_814465-MLA79345006240_092024-O.webp"
+			}
+		],
+		"price" : 249.99,
+		"offer": 8
+	  },
+	  {
+		"id": 9, 
+		"name": "Samsung Smart TV 50'",
+		"description": "UHD 4K 50DU7700 2024 Processador Crystal 4K Gaming...",
+		"images": [
+			    {
+					"id": 1, 
+				    "url":"https://http2.mlstatic.com/D_NQ_NP_700507-MLU78160025232_082024-O.webp"
+				},
+				{
+					"id": 2,
+					"url":"https://http2.mlstatic.com/D_NQ_NP_700507-MLU78160025232_082024-O.webp"
+				},
+				{
+					"id": 3,
+					"url":"https://http2.mlstatic.com/D_NQ_NP_700507-MLU78160025232_082024-O.webp"
+				}
+			],
+		"price": 3999,
+		"offer": 40
+	  },
+	  {
+		"id": 10, 
+		"name": "Smart Tv LG Led 65",
+		"description": "65UR871C0SA AI Thinq Led 4k 65 100v 240v Preto",
+		"images": [
+			{
+				"id": 1,
+			    "url":"https://http2.mlstatic.com/D_NQ_NP_884778-MLU77355786759_062024-O.webp"
+			},
+			{
+				"id": 2,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_884778-MLU77355786759_062024-O.webp"
+			},
+			{
+				"id": 3,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_884778-MLU77355786759_062024-O.webp"
+			}
+		],
+		"price": 5499.94,
+		"offer": 43
+	  },
+	  {
+		"id": 11, 
+		"name": "Fritadeira Air Fryer",
+		"description": "Pfr15pg Gourmet 4,4l Black Philco 127v",
+		"image": [
+			{
+				"id": 1,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_676762-MLU74978646295_032024-O.webp"
+			},
+			{
+				"id": 2,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_676762-MLU74978646295_032024-O.webp"
+			},
+			{
+				"id": 3,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_676762-MLU74978646295_032024-O.webp"
+			}
+		],
+		"price": 474.60,
+		"offer": 36
+	  },
+	  {
+		"id": 12, 
+		"name": "Fone de ouvido sem fio",
+		"description": "JBL Tune 520BT Dobrável Preto",
+		"image": [
+			{
+				"id": 1,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_986177-MLU73187129209_122023-O.webp"
+			},
+			{
+				"id": 2,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_986177-MLU73187129209_122023-O.webp"
+			},
+			{
+				"id": 3,
+				"url":"https://http2.mlstatic.com/D_NQ_NP_986177-MLU73187129209_122023-O.webp"
+			}
+		],
+		"price": 324,
+		"offer": 29
+	  }
+	]
