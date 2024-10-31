@@ -30,6 +30,26 @@ export default function OfertasSection({products }: ofertasSectionSectionProps) 
     setStartIndex((prevIndex) => (prevIndex - 1 + products.length) % products.length)
   }
 
+  if (!Array.isArray(products) || products.length === 0) {
+    return (
+      <section className="py-12 my-5 rounded-lg container bg-white mx-auto px-4">
+        <div className="container mx-auto p-4 flex space-x-4 overflow-hidden">
+          {[1, 2, 3, 4, 5].map((_, index) => (
+            <div
+              key={index}
+              className="w-full max-w-[250px] rounded-lg bg-gray-200 animate-pulse shadow-lg p-4"
+            >
+              <div className="aspect-square bg-gray-300 rounded-lg mb-4"></div>
+              <div className="h-4 bg-gray-300 rounded mb-2"></div>
+              <div className="h-4 bg-gray-300 rounded mb-2 w-2/3"></div>
+              <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-12">
       <div className="rounded-lg container bg-white mx-auto px-4">

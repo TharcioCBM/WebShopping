@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+//import { useRouter } from 'next/navigation';
 import Wrapper from '../../wrappers/ModalWrappers';
 import CloseButton from '../../common/ClosedButton';
 import InputField from '../../common/InputField';
 import ActionButton from '../../common/ActionButton';
+import { useAuth } from '@/app/contexts/AuthContext';
 
 interface LoginModalProps {
   onClose: () => void;
@@ -11,7 +12,8 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => {
-  const router = useRouter();
+  //const router = useRouter();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -32,15 +34,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => 
 
       if (res.ok) {
         const data = await res.json();
-        localStorage.setItem('token', data.token);
-        router.push('/');
-        console.log(data.message);
+        login(data.token, data.user);
+        onClose();
       } else {
         const errorData = await res.json();
         setError(errorData.error_message || 'Usuário e/ou senha inválidos');
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
+      console.error(err);
       setError('Erro ao conectar ao servidor.');
     } finally {
       setLoading(false);
@@ -104,5 +105,4 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => 
     </Wrapper>
   );
 };
-
 export default LoginModal;

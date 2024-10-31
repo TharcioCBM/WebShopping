@@ -20,8 +20,9 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
       } else {
         res.status(response.status).json({ message: data.message });
       }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    
     } catch (error) {
+      console.error(error);
       res.status(500).json({ message: 'Erro na autenticação.' });
     }
   } else {

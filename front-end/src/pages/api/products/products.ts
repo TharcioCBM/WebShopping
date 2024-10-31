@@ -13,12 +13,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             if (response.ok) {
                 res.status(200).json(data);
-                console.log(data);
+                //console.log(data);
             } else {
                 res.status(response.status).json({ message: data.message });
             }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        
         } catch (error) {
+            console.error(error);
             res.status(500).json({ message: 'Erro ao buscar produtos.' });
         }
     } else {

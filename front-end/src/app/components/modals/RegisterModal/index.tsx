@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+//import { useRouter } from 'next/navigation';
 import ModalWrapper from '../../wrappers/ModalWrappers';
 import CloseButton from '../../common/ClosedButton';
 import InputField from '../../common/InputField';
 import EmailInput from '../../common/EmailInput';
 import ActionButton from '../../common/ActionButton';
+import { useAuth } from '@/app/contexts/AuthContext';
 
 interface RegisterModalProps {
   onClose: () => void;
@@ -12,7 +13,8 @@ interface RegisterModalProps {
 }
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onLoginClick }) => {
-  const router = useRouter();
+  //const router = useRouter();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -34,14 +36,15 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onLoginClick }) 
 
       if (res.ok) {
         const data = await res.json();
-        router.push('/');
+        login(data.token, data.user);
+        onClose();
         console.log(data.message);
       } else {
         const errorData = await res.json();
         setError(errorData.message);
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
+      console.error(err);
       setError('Erro ao conectar ao servidor.');
     } finally {
       setLoading(false);

@@ -22,7 +22,6 @@ const Home: React.FC = () => {
         if (res.ok) {
           const data = await res.json();
           setProducts(data.request_data.products);
-          console.log(data);
         } else {
           console.error('Erro ao buscar produtos:', res.statusText);
         }

@@ -20,8 +20,9 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
         const errorData = await response.json();
         return res.status(response.status).json({ message: errorData.error_message });
       }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    
     } catch (error) {
+      console.error(error);
       return res.status(500).json({ message: 'Erro no servidor. Tente novamente mais tarde.' });
     }
   } else {
