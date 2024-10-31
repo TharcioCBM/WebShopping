@@ -2,9 +2,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
-        const productName = req.headers['x-product-name'];
+        const searchQuery = req.headers['x-search-query'];
+        console.log(searchQuery)
         try {
-            const response = await fetch('http://127.0.0.1:8080/product/s?k=' + productName, {
+            const response = await fetch(`http://127.0.0.1:8080/product/s?k=${searchQuery}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

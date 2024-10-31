@@ -20,43 +20,72 @@ export default function SearchResults() {
     const searchParams = useSearchParams()
     const categoryName = searchParams?.get('name')
     const categoryId = searchParams?.get('category') ?? ''
+    const searchQuery = searchParams?.get('q')
     const [productsData, setProductsData] = useState<Product[]>([]);
 
     console.log(categoryName)
 
     useEffect(() => {
         const fetchProducts = async () => {
-            try {
-                const res = await fetch('/api/categories/searchCategories', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Category-Id': categoryId || '',
-                    },
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    setProductsData(data.request_data.products);
-                    console.log(data);
-                } else {
-                    console.error('Erro ao buscar produtos:', res.statusText);
+
+            if(categoryId){
+                try {
+                    const res = await fetch('/api/categories/searchCategories', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Category-Id': categoryId || '',
+                        },
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        setProductsData(data.request_data.products);
+                        console.log(data);
+                    } else {
+                        console.error('Erro ao buscar produtos:', res.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error fetching products:', error);
                 }
-            } catch (error) {
-                console.error('Error fetching products:', error);
+            }
+            
+            else if (searchQuery) {
+                try {
+                    console.log(searchQuery)
+                    const res = await fetch('/api/products/searchProducts', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Search-Query': searchQuery || '',
+                        },
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        setProductsData(data.request_data.products);
+                        console.log(data);
+                    } else {
+                        console.error('Erro ao buscar produtos:', res.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error fetching products:', error);
+                }
             }
         };
 
         if (categoryId) {
             fetchProducts();
         }
-    }, [categoryId]);
+        else if (searchQuery) {
+            fetchProducts();
+        }
+    }, [categoryId, searchQuery]);
 
     return (
         <div className="h-full">
             <div className="container bg-transparent mx-auto px-4 py-8">
                 <div className="bg-sky-950  p-8">
                     <h1 className="text-2xl text-white font-normal">
-                        Pesquisa por: <span className="text-slate-100 font-semibold">{categoryName}</span>
+                        Pesquisa por: <span className="text-slate-100 font-semibold">{categoryName || searchQuery}</span>
                     </h1>
                 </div>
 
