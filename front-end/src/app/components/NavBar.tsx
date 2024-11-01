@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link'
 import { Input } from "@/components/ui/input"
@@ -7,12 +7,16 @@ import { Button } from "@/components/ui/button"
 import { ShoppingCart, Search } from "lucide-react"
 import LoginModal from './modals/LoginModal';
 import RegisterModal from './modals/RegisterModal';
+import { useCart } from '../contexts/CartContext';
 
 const NavBar: React.FC = () => {
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
     const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
     const router = useRouter();
     const [searchQuery, setSearchQuery] = useState('');
+    const { cart } = useCart();
+    const [cartCount, setCartCount] = useState(0);
+
 
     const toggleLoginModal = () => setLoginModalOpen(!isLoginModalOpen);
     const toggleRegisterModal = () => setRegisterModalOpen(!isRegisterModalOpen);
@@ -34,9 +38,17 @@ const NavBar: React.FC = () => {
         router.push(`/searchResults?q=${encodeURIComponent(searchQuery)}`);
     };
 
+    const handleCartClick = () => {
+        router.push("/shoppingCart");
+      };
+
+      useEffect(() => {
+        setCartCount(cart ? cart.reduce((acc, item) => acc + item.quantity, 0) : 0);
+    }, [cart]); 
+
 
     return (
-        <nav className="bg-white border shadow-sm m-0 p-0">
+        <nav className="bg-white border shadow-sky-950/90 m-0 p-0">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
@@ -67,21 +79,22 @@ const NavBar: React.FC = () => {
                     </div>
                     <div className="hidden sm:ml-6 sm:flex sm:items-center">
                         <div className="flex space-x-4">
-                            <Link href="/" className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+                            <Link href="/" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
                                 Home
                             </Link>
-                            <Link href="/categorias" className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+                            <Link href="/categorias" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
                                 Categorias
                             </Link>
-                            <Link href="/ofertas" className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+                            <Link href="/ofertas" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
                                 Ofertas
                             </Link>
                         </div>
                         <Button variant="ghost" onClick={toggleRegisterModal} className="ml-4 text-gray-500 hover:text-gray-700">
                             Criar conta
                         </Button>
-                        <Button variant="ghost" className="ml-4 text-gray-500 hover:text-gray-700" aria-label="Shopping cart">
+                        <Button variant="ghost" className="border ml-4 text-gray-500 hover:text-gray-700" aria-label="Shopping cart" onClick={handleCartClick}>
                             <ShoppingCart className="h-6 w-6" />
+                            <span className="ml-1">{cartCount}</span>
                         </Button>
                     </div>
                 </div>

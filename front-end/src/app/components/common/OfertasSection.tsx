@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+
 
 interface Product {
   id: string;
@@ -21,6 +23,7 @@ interface ofertasSectionSectionProps {
 
 export default function OfertasSection({products }: ofertasSectionSectionProps) {
   const [startIndex, setStartIndex] = useState(0)
+  const router = useRouter();
 
   const nextProduct = () => {
     setStartIndex((prevIndex) => (prevIndex + 1) % products.length)
@@ -50,6 +53,10 @@ export default function OfertasSection({products }: ofertasSectionSectionProps) 
     );
   }
 
+  const handleClick = (productId: string) => {
+    router.push(`/ProductDetail?id=${encodeURIComponent(productId)}`);
+  };
+
   return (
     <section className="py-12">
       <div className="rounded-lg container bg-white mx-auto px-4">
@@ -57,7 +64,7 @@ export default function OfertasSection({products }: ofertasSectionSectionProps) 
         <div className="relative">
           <div className="flex overflow-x-hidden">
             {products.map((product, index) => (
-              <Card key={product.id} className="w-full max-w-[250px] flex-shrink-0 mr-4 transition-transform duration-300 ease-in-out" style={{
+              <Card key={product.id} onClick={() => handleClick(product.id)} className="w-full max-w-[250px] flex-shrink-0 mr-4 transition-transform duration-300 ease-in-out" style={{
                 transform: `translateX(-${startIndex * 208}px)`
               }}>
                 <CardContent className="p-4">

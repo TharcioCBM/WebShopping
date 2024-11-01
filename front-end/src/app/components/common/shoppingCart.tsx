@@ -3,12 +3,14 @@ import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Minus, Plus, Trash2 } from "lucide-react"
+import { useCart } from '../../contexts/CartContext'
 
 interface CartItem {
   id: string
   name: string
-  image: string
+  images: string
   price: number
+  offer: number
   quantity: number
 }
 
@@ -18,7 +20,9 @@ interface ShoppingCartProps {
   onRemoveItem: (id: string) => void
 }
 
+
 export function ShoppingCart({ items, onUpdateQuantity, onRemoveItem }: ShoppingCartProps) {
+  const { removeFromCart } = useCart()
   const [selectedItems, setSelectedItems] = useState<string[]>([])
 
   const toggleItemSelection = (id: string) => {
@@ -28,14 +32,22 @@ export function ShoppingCart({ items, onUpdateQuantity, onRemoveItem }: Shopping
   }
 
   const handleDeselectItems = () => {
-    selectedItems.forEach(id => onRemoveItem(id))
+    selectedItems.forEach(id => handleRemove(id))
     setSelectedItems([])
   }
 
-  const totalPrice = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const handleRemove = (id: string) => {
+    onRemoveItem(id)
+    removeFromCart(id)
+  }
+
+  const totalPrice = items.reduce((sum, item) => {
+    const discountedPrice = item.price * (1 - item.offer / 100)
+    return sum + discountedPrice * item.quantity
+  }, 0)
 
   return (
-    <Card className="bg-white">
+    <Card className="rounded-md bg-white">
       <CardContent className="p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-medium">Carrinho de compras</h2>
@@ -64,7 +76,7 @@ export function ShoppingCart({ items, onUpdateQuantity, onRemoveItem }: Shopping
               />
               <div className="w-24 h-24 relative">
                 <Image
-                  src={item.image}
+                  src={item.images[0]}
                   alt={item.name}
                   layout="fill"
                   objectFit="contain"
@@ -100,7 +112,7 @@ export function ShoppingCart({ items, onUpdateQuantity, onRemoveItem }: Shopping
                 </div>
               </div>
               <div className="text-right">
-                <p className="font-medium">R$ {(item.price * item.quantity).toFixed(2)}</p>
+                <p className="font-medium">R$ {(item.price * (1 - item.offer / 100) * item.quantity).toFixed(2)}</p>
               </div>
             </div>
           </div>

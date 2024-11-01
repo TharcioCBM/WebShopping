@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react'
+import { useRouter } from 'next/navigation';
 import Image from 'next/image'
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -21,6 +22,7 @@ interface FeaturedProductsSectionProps {
 
 export default function FeaturedProductsSection({ products }: FeaturedProductsSectionProps) {
   const [startIndex, setStartIndex] = useState(0)
+  const router = useRouter();
 
   const nextProduct = () => {
     setStartIndex((prevIndex) => (prevIndex + 1) % products.length)
@@ -29,6 +31,10 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
   const prevProduct = () => {
     setStartIndex((prevIndex) => (prevIndex - 1 + products.length) % products.length)
   }
+
+  const handleClick = (productId: string) => {
+    router.push(`/ProductDetail?id=${encodeURIComponent(productId)}`);
+  };
 
   if (!Array.isArray(products) || products.length === 0) {
     return (
@@ -57,6 +63,7 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
           {products.map((product, index) => (
             <Card
               key={product.id}
+              onClick={() => handleClick(product.id)}
               className="rounded-lg border w-full max-w-[250px] h-full flex-shrink-0 transition-transform duration-300 ease-in-out"
               style={{
                 transform: `translateX(-${startIndex * 254}px)`
