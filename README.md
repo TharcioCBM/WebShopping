@@ -52,7 +52,14 @@ Este projeto visa o desenvolvimento de uma plataforma de e-commerce simples, na 
 - Armazenamento seguro dos dados dos usuários, sem compartilhamento sem consentimento.
 
 ## Tecnologias Utilizadas
-- **Front-end**: React, Next.js e Tailwind CSS.
+- **Front-end**: 
+  - React
+  - Next.js 
+  - Tailwind CSS
+  - TypeScript
+  - React Hooks (useState, useAuth)
+  - Fetch API Para HTTP requests
+
 - **Back-end**: Python (Flask)
 - **Banco de Dados**: PostgreSQL
 - **Autenticação**: JWT (JSON Web Tokens)
