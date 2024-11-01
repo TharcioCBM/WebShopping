@@ -51,7 +51,7 @@ export default function SearchResults() {
 
             else if (searchQuery) {
                 try {
-                    console.log(searchQuery)
+                   
                     const res = await fetch('/api/products/searchProducts', {
                         method: 'GET',
                         headers: {
@@ -62,7 +62,7 @@ export default function SearchResults() {
                     if (res.ok) {
                         const data = await res.json();
                         setProductsData(data.request_data.products);
-                        console.log(data);
+                        
                     } else {
                         console.error('Erro ao buscar produtos:', res.statusText);
                     }
@@ -87,7 +87,7 @@ export default function SearchResults() {
             <div className="w-full bg-transparent p-0">
                 <div className="bg-sky-950  p-8">
                     <button
-                        onClick={() => window.history.back()}
+                        onClick={() => window.history.go(-1)}
                         className="text-white underline mb-2"
                     >
                         Voltar
@@ -100,7 +100,7 @@ export default function SearchResults() {
                 <div className="bg-transparent p-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  justify-items-center">
                         {productsData.map((product) => (
-                            <Link className='w-full max-w-[250px] h-full' href={`/product/${product.id}`} key={product.id}>
+                            <Link className='w-full max-w-[250px] h-full' href={`/ProductDetail/?id=${product.id}`} key={product.id}>
                                 <Card className="rounded-lg hover:shadow-lg transition-shadow duration-200 w-full max-w-sm">
                                     <CardContent className="p-4 flex flex-col h-full">
                                         <div className="aspect-square relative mb-4 w-full">
