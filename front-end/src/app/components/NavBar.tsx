@@ -8,6 +8,7 @@ import { ShoppingCart, Search } from "lucide-react"
 import LoginModal from './modals/LoginModal';
 import RegisterModal from './modals/RegisterModal';
 import { useCart } from '../contexts/CartContext';
+import CategoriesDropdown from './common/CategoriesDropdown';
 
 const NavBar: React.FC = () => {
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -82,9 +83,7 @@ const NavBar: React.FC = () => {
                             <Link href="/" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
                                 Home
                             </Link>
-                            <Link href="/categorias" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
-                                Categorias
-                            </Link>
+                            <CategoriesDropdown />
                             <Link href="/ofertas" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
                                 Ofertas
                             </Link>
