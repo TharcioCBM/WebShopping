@@ -4,6 +4,8 @@ import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Card, CardContent } from "@/components/ui/card"
+import { ChevronLeft } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface Product {
     id: string
@@ -40,7 +42,6 @@ export default function SearchResults() {
                     if (res.ok) {
                         const data = await res.json();
                         setProductsData(data.request_data.products);
-                        console.log(data);
                     } else {
                         console.error('Erro ao buscar produtos:', res.statusText);
                     }
@@ -81,6 +82,32 @@ export default function SearchResults() {
     }, [categoryId, searchQuery]);
 
     const maxProductsToShow = 12;
+
+    if (!productsData || Object.keys(productsData).length === 0) {
+        return (
+          <div className="container mx-auto px-4 py-8">
+            <Link href="#" onClick={() => window.history.go(-1)} className="flex items-center text-blue-600 hover:underline mb-6">
+              <ChevronLeft size={20} />
+              <span>Voltar</span>
+            </Link>
+            
+            <Card className="max-w-2xl mx-auto p-8 text-center">
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-gray-900">Produto não encontrado</h2>
+                <p className="text-gray-600">
+                  Desculpe, não conseguimos encontrar o produto que você está procurando.
+                </p>
+                <Button 
+                  onClick={() => window.history.go(-1)}
+                  className="bg-[#333137] hover:bg-[#333137]/90 text-white px-6"
+                >
+                  Continuar Comprando
+                </Button>
+              </div>
+            </Card>
+          </div>
+        );
+      }
 
     return (
         <div className="w-full h-full">

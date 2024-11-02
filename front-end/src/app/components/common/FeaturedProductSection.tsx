@@ -64,7 +64,7 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
             <Card
               key={product.id}
               onClick={() => handleClick(product.id)}
-              className="rounded-lg border w-full max-w-[250px] h-full min-h-[418px] flex-shrink-0 transition-transform duration-300 ease-in-out"
+              className="rounded-lg border hover:shadow-md w-full max-w-[250px] h-full min-h-[418px] flex-shrink-0 transition-transform duration-300 ease-in-out"
               style={{
                 transform: `translateX(-${startIndex * 254}px)`
               }}
@@ -97,8 +97,7 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
                 </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
+          ))}        </div>
         <Button
           variant="outline"
           size="icon"

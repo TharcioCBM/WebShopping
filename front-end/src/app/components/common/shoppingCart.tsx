@@ -124,5 +124,4 @@ export function ShoppingCart({ items, onUpdateQuantity, onRemoveItem }: Shopping
         </div>
       </CardContent>
     </Card>
-
   )}
