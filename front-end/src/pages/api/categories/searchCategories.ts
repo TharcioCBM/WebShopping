@@ -4,7 +4,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === 'GET') {
         const categoryId = req.headers['x-category-id'];
         try {
-            const response = await fetch(`http://127.0.0.1:8080/categories/${categoryId}`, {
+            const API_URL = process.env.API_URL || 'http://127.0.0.1:8080';
+            const response = await fetch(`${API_URL}/categories/${categoryId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

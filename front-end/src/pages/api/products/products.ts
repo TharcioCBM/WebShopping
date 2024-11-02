@@ -5,10 +5,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             const productId = req.query['x-product-id']
 
-            const url = productId 
-                ? `http://127.0.0.1:8080/product/${productId}`
-                : 'http://127.0.0.1:8080/product/offer';
-
+            const BASE_URL = process.env.API_BASE_URL;
+            const url = productId ? `${BASE_URL}/product/${productId}` : `${BASE_URL}/product/offer`;
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -23,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             } else {
                 res.status(response.status).json({ message: data.message });
             }
-        
+
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Erro ao buscar produtos.' });

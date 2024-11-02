@@ -5,8 +5,8 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
     try {
       const { username, password } = req.body;
 
-      const response = await fetch('http://127.0.0.1:8080/users/login', {
-        method: 'POST',
+      const API_URL = process.env.API_BASE_URL;
+            const response = await fetch(`${API_URL}/users/login`, {        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },

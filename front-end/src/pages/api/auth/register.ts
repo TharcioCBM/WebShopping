@@ -5,7 +5,8 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
     try {
       const { username, email, password } = req.body;
 
-      const response = await fetch('http://127.0.0.1:8080/users', {
+      const API_URL = process.env.API_BASE_URL;
+      const response = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
