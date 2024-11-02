@@ -51,7 +51,7 @@ export default function SearchResults() {
 
             else if (searchQuery) {
                 try {
-                   
+
                     const res = await fetch('/api/products/searchProducts', {
                         method: 'GET',
                         headers: {
@@ -62,7 +62,7 @@ export default function SearchResults() {
                     if (res.ok) {
                         const data = await res.json();
                         setProductsData(data.request_data.products);
-                        
+
                     } else {
                         console.error('Erro ao buscar produtos:', res.statusText);
                     }
@@ -112,28 +112,31 @@ export default function SearchResults() {
                                                 className="rounded-lg"
                                             />
                                         </div>
-                                    <h2 className="text-base font-medium text-gray-900 mb-2 line-clamp-2 min-h-[40px]">
-                                        {product.name}
-                                    </h2>
-                                    <p className="text-xs text-gray-600 mb-2 line-clamp-2 min-h-[32px]">{product.description}</p>
-                                    <div className=" mt-auto space-y-1">
-                                        <p className="text-sm text-gray-500 line-through">
-                                            R$ {product.price.toFixed(2)}
-                                        </p>
-                                        <p className="text-lg font-bold text-gray-900">
-                                            R$ {(product.price * (1 - (product.offer / 100))).toFixed(2)}
-                                        </p>
-                                        <p className="text-sm font-medium text-green-600">
-                                            {product.offer}% OFF
-                                        </p>
-                                    </div>
-                                </CardContent>
-                            </Card>
+                                        <h2 className="text-base font-medium text-gray-900 mb-2 line-clamp-2 min-h-[40px]">
+                                            {product.name}
+                                        </h2>
+                                        <p className="text-xs text-gray-600 mb-2 line-clamp-2 min-h-[32px]">{product.description}</p>
+                                        <div className="flex flex-col">
+                                            <span className="text-xs text-gray-500 line-through">
+                                                R$ {product.price.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                            </span>
+                                            <div className="flex items-center space-x-1">
+                                                <span className="text-sm font-bold">
+                                                    R$ {(product.price * (1 - product.offer / 100)).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                </span>
+                                                <span className="text-xs font-semibold text-green-600">
+                                                    {product.offer}% OFF
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </CardContent>
+                                </Card>
                             </Link>
                         ))}
-                </div>
+                    </div>
 
-                {productsData.length > maxProductsToShow && (
+                    {productsData.length > maxProductsToShow && (
                         <div className="mt-8 text-center">
                             <Link
                                 href="/search/all"
@@ -143,8 +146,8 @@ export default function SearchResults() {
                             </Link>
                         </div>
                     )}
+                </div>
             </div>
-        </div>
         </div >
     )
 }

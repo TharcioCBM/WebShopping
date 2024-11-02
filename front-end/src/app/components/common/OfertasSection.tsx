@@ -21,7 +21,7 @@ interface ofertasSectionSectionProps {
   products: Product[];
 }
 
-export default function OfertasSection({products }: ofertasSectionSectionProps) {
+export default function OfertasSection({ products }: ofertasSectionSectionProps) {
   const [startIndex, setStartIndex] = useState(0)
   const router = useRouter();
 
@@ -81,17 +81,16 @@ export default function OfertasSection({products }: ofertasSectionSectionProps) 
                   <p className="text-xs text-gray-600 mb-2 line-clamp-2">{product.description}</p>
                   <div className="flex flex-col">
                     <span className="text-xs text-gray-500 line-through">
-                    R$ {product.price.toFixed(2)}
+                      R$ {product.price.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2  })}
                     </span>
-                    <span className="text-sm font-bold">
-                    R$ {(product.price * (1 - (product.offer / 100))).toFixed(2)}
-                    </span>
-                    <span className="text-xs font-semibold text-green-600">
-                      {product.offer}% OFF
-                    </span>
-                    <span className="text-xs text-green-600">
-                      Frete grátis
-                    </span>
+                    <div className="flex items-center space-x-1">
+                      <span className="text-sm font-bold">
+                        R$ {(product.price * (1 - product.offer / 100)).toLocaleString("pt-BR", { minimumFractionDigits: 2 , maximumFractionDigits: 2 })}
+                      </span>
+                      <span className="text-xs font-semibold text-green-600">
+                        {product.offer}% OFF
+                      </span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

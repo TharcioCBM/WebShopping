@@ -21,7 +21,12 @@ export function PurchaseSummary({  discount, total, onCheckout }: PurchaseSummar
           
           <div className="flex justify-between items-center border-t pt-4">
             <span className="text-gray-600">Total</span>
-            <span className="text-2xl font-bold">R$ {total.toFixed(2)}</span>
+            <span className="text-2xl font-bold">
+              R$ {(total).toLocaleString("pt-BR", { 
+                minimumFractionDigits: 2, 
+                maximumFractionDigits: 2 
+              })}
+            </span>
           </div>
         </div>
 

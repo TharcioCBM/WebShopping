@@ -37,7 +37,7 @@ export default function ProductDetail() {
         });
         if (res.ok) {
           const data = await res.json();
-          setProductsData(data.request_data); 
+          setProductsData(data.request_data);
         } else {
           console.error('Erro ao buscar produtos:', res.statusText);
         }
@@ -69,7 +69,7 @@ export default function ProductDetail() {
     const currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
     const updatedCart = [...currentCart, { ...productsData, quantity: 1 }];
     localStorage.setItem('cart', JSON.stringify(updatedCart));
-    
+
     addToCart({
       id: productsData.id,
       name: productsData.name,
@@ -78,7 +78,7 @@ export default function ProductDetail() {
       quantity: 1,
     });
   };
-  
+
 
   return (
     <div className="container justify-items-center mb-4 mx-auto px-4 py-4">
@@ -130,10 +130,10 @@ export default function ProductDetail() {
               <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">{productsData.name}</h1>
               <div className="flex flex-wrap items-baseline gap-2 mb-4">
                 <span className="text-2xl font-semibold">
-                  R$ {discountedPrice.toFixed(2)}
+                  R$ {discountedPrice.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
                 <span className="text-sm text-gray-500 line-through">
-                  R$ {productsData.price.toFixed(2)}
+                  R$ {productsData.price.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
                 <span className="text-sm font-semibold text-green-600">
                   {productsData.offer}% OFF
@@ -196,5 +196,6 @@ export default function ProductDetail() {
         </Card>
       </div>
     </div>
-  )}
+  )
+}
 

@@ -44,7 +44,7 @@ export function ShoppingCart({ items, onUpdateQuantity, onRemoveItem }: Shopping
   const totalPrice = items.reduce((sum, item) => {
     const discountedPrice = item.price * (1 - item.offer / 100)
     return sum + discountedPrice * item.quantity
-  }, 0)
+  }, 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
   return (
     <Card className="rounded-md bg-white">
@@ -62,7 +62,7 @@ export function ShoppingCart({ items, onUpdateQuantity, onRemoveItem }: Shopping
 
         <div className="flex justify-between items-center mb-6">
           <span className="text-gray-600">Preço</span>
-          <span className="text-xl font-medium">R$ {totalPrice.toFixed(2)}</span>
+          <span className="text-xl font-medium">R$ {totalPrice}</span>
         </div>
 
         {items.map((item) => (
@@ -112,7 +112,7 @@ export function ShoppingCart({ items, onUpdateQuantity, onRemoveItem }: Shopping
                 </div>
               </div>
               <div className="text-right">
-                <p className="font-medium">R$ {(item.price * (1 - item.offer / 100) * item.quantity).toFixed(2)}</p>
+                <p className="font-medium">R$ {(item.price * (1 - item.offer / 100) * item.quantity).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
               </div>
             </div>
           </div>
@@ -120,9 +120,9 @@ export function ShoppingCart({ items, onUpdateQuantity, onRemoveItem }: Shopping
 
         <div className="flex justify-between items-center border-t pt-4 mt-4">
           <span className="text-gray-600">Subtotal (Quantidade):</span>
-          <span className="text-xl font-medium">R$ {totalPrice.toFixed(2)}</span>
+          <span className="text-xl font-medium">R$ {totalPrice}</span>
         </div>
       </CardContent>
     </Card>
-  )
-}
+
+  )}

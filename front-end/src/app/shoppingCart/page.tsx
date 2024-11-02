@@ -5,7 +5,7 @@ import { PurchaseSummary } from '../components/common/purchaseSummary'
 import { useCart } from '../contexts/CartContext';
 
 export default function CartPage() {
-    const { removeFromCart,updateCart } = useCart();
+    const { removeFromCart, updateCart } = useCart();
     const [items, setItems] = useState<Product[]>([]);
 
     useEffect(() => {
@@ -30,12 +30,14 @@ export default function CartPage() {
     };
 
     const handleCheckout = () => {
-        
+
     };
 
-    const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const subtotal = items.reduce((acc, item) => {
+        const discount = item.price * (1 - item.offer / 100)
+        return acc + discount * item.quantity
+    },0);
     const discount = items.reduce((acc, item) => acc + item.offer * item.quantity, 0);
-    const total = subtotal - discount;
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -50,7 +52,7 @@ export default function CartPage() {
                 <div>
                     <PurchaseSummary
                         discount={discount}
-                        total={total}
+                        total={subtotal}
                         onCheckout={handleCheckout}
                     />
 

@@ -64,7 +64,7 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
             <Card
               key={product.id}
               onClick={() => handleClick(product.id)}
-              className="rounded-lg border w-full max-w-[250px] h-full flex-shrink-0 transition-transform duration-300 ease-in-out"
+              className="rounded-lg border w-full max-w-[250px] h-full min-h-[418px] flex-shrink-0 transition-transform duration-300 ease-in-out"
               style={{
                 transform: `translateX(-${startIndex * 254}px)`
               }}
@@ -84,17 +84,16 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
                 <p className="text-xs text-gray-600 mb-2 line-clamp-2">{product.description}</p>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 line-through">
-                    R$ {product.price.toFixed(2)}
+                  R$ {product.price.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2  })}
                   </span>
-                  <span className="text-sm font-bold">
-                    R$ {(product.price * (1 - (product.offer / 100))).toFixed(2)}
-                  </span>
-                  <span className="text-xs font-semibold text-green-600">
-                    {product.offer}% OFF
-                  </span>
-                  <span className="text-xs text-green-600">
-                    {product.shipping== '' ? 'Frete Grátis' : 'Frete R$ 10,00'}
-                  </span>
+                  <div className="flex items-center space-x-1">
+                    <span className="text-sm font-bold">
+                    R$ {(product.price * (1 - product.offer / 100)).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2  })}
+                    </span>
+                    <span className="text-xs font-semibold text-green-600">
+                      {product.offer}%OFF
+                    </span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -105,7 +104,7 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
           size="icon"
           className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1/2 bg-white"
           onClick={prevProduct}
-          aria-label="Previous product" 
+          aria-label="Previous product"
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
