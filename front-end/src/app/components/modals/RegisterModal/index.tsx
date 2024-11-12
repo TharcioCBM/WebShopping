@@ -28,23 +28,21 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onLoginClick }) 
     setError('');
 
     try {
-      const res = await fetch('api/auth/register', {
+      const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
       });
 
+      const data = await res.json();
+      
       if (res.ok) {
-        const data = await res.json();
-        login(data.token, data.user);
+        login(data.token, data);
         onClose();
-        console.log(data.message);
       } else {
-        const errorData = await res.json();
-        setError(errorData.message);
+        setError(data.message || 'Erro no cadastro');
       }
     } catch (err) {
-      console.error(err);
       setError('Erro ao conectar ao servidor.');
     } finally {
       setLoading(false);

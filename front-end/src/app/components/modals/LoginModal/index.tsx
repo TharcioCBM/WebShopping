@@ -26,22 +26,21 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => 
     setError('');
 
     try {
-      const res = await fetch('api/auth/login', {
+      const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       });
 
+      const data = await res.json();
+      
       if (res.ok) {
-        const data = await res.json();
-        login(data.token, data.user);
+        login(data.token, data);
         onClose();
       } else {
-        const errorData = await res.json();
-        setError(errorData.error_message || 'Usuário e/ou senha inválidos');
+        setError(data.error_message || 'Usuário e/ou senha inválidos');
       }
     } catch (err) {
-      console.error(err);
       setError('Erro ao conectar ao servidor.');
     } finally {
       setLoading(false);
@@ -61,7 +60,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => 
         <InputField
           id="username"
           label="Usuário"
-          placeholder="ex.: tercio@email.com"
+          placeholder="ex.: tercio"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
