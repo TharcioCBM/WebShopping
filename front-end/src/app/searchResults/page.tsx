@@ -24,11 +24,12 @@ export default function SearchResults() {
     const categoryId = searchParams?.get('category') ?? ''
     const searchQuery = searchParams?.get('q')
     const [productsData, setProductsData] = useState<Product[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    console.log(categoryName)
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setIsLoading(true);
 
             if (categoryId) {
                 try {
@@ -69,6 +70,8 @@ export default function SearchResults() {
                     }
                 } catch (error) {
                     console.error('Error fetching products:', error);
+                } finally {
+                    setIsLoading(false);
                 }
             }
         };
@@ -79,9 +82,50 @@ export default function SearchResults() {
         else if (searchQuery) {
             fetchProducts();
         }
+        
     }, [categoryId, searchQuery]);
 
     const maxProductsToShow = 12;
+
+    if (isLoading) {
+        return (
+            <div className="w-full h-full">
+                <div className="w-full bg-transparent p-0">
+                    <div className="bg-sky-950 p-8">
+                        <button
+                            onClick={() => window.history.go(-1)}
+                            className="text-white underline mb-2"
+                        >
+                            Voltar
+                        </button>
+                        <h1 className="text-2xl text-white font-normal">
+                            Pesquisa por: <span className="text-slate-100 font-semibold">{categoryName || searchQuery}</span>
+                        </h1>
+                    </div>
+    
+                    <div className="bg-transparent p-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
+                            {Array.from({ length: 12 }).map((_, index) => (
+                                <Card className="rounded-lg w-full max-w-[250px] h-full animate-pulse" key={index}>
+                                    <CardContent className="p-4 flex flex-col h-full">
+                                        <div className="aspect-square bg-gray-300 w-full mb-4 rounded-lg" />
+                                        <div className="h-4 bg-gray-300 w-3/4 mb-2 rounded" />
+                                        <div className="h-3 bg-gray-300 w-full mb-2 rounded" />
+                                        <div className="h-3 bg-gray-300 w-1/2 rounded" />
+                                        <div className="flex flex-col mt-4">
+                                            <div className="h-3 bg-gray-300 w-1/3 mb-1 rounded" />
+                                            <div className="h-3 bg-gray-300 w-1/4 rounded" />
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    
 
     if (!productsData || Object.keys(productsData).length === 0) {
         return (
@@ -110,6 +154,7 @@ export default function SearchResults() {
       }
 
     return (
+        
         <div className="w-full h-full">
             <div className="w-full bg-transparent p-0">
                 <div className="bg-sky-950  p-8">
