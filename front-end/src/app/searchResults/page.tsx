@@ -48,6 +48,8 @@ export default function SearchResults() {
                     }
                 } catch (error) {
                     console.error('Error fetching products:', error);
+                } finally {
+                    setIsLoading(false);
                 }
             }
 
