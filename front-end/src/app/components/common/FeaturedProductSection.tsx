@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react'
+import { useRouter } from 'next/navigation';
 import Image from 'next/image'
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -21,6 +22,7 @@ interface FeaturedProductsSectionProps {
 
 export default function FeaturedProductsSection({ products }: FeaturedProductsSectionProps) {
   const [startIndex, setStartIndex] = useState(0)
+  const router = useRouter();
 
   const nextProduct = () => {
     setStartIndex((prevIndex) => (prevIndex + 1) % products.length)
@@ -29,6 +31,10 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
   const prevProduct = () => {
     setStartIndex((prevIndex) => (prevIndex - 1 + products.length) % products.length)
   }
+
+  const handleClick = (productId: string) => {
+    router.push(`/ProductDetail?id=${encodeURIComponent(productId)}`);
+  };
 
   if (!Array.isArray(products) || products.length === 0) {
     return (
@@ -57,13 +63,14 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
           {products.map((product, index) => (
             <Card
               key={product.id}
-              className="rounded-lg border w-full max-w-[250px] flex-shrink-0 transition-transform duration-300 ease-in-out"
+              onClick={() => handleClick(product.id)}
+              className="rounded-lg border hover:shadow-md w-full max-w-[250px] h-full min-h-[418px] flex-shrink-0 transition-transform duration-300 ease-in-out"
               style={{
                 transform: `translateX(-${startIndex * 254}px)`
               }}
             >
-              <CardContent className="p-4">
-                <div className="aspect-square relative mb-4 flex items-center justify-center">
+              <CardContent className="p-4 flex flex-col h-full">
+                <div className="aspect-square relative mb-4 w-full flex items-center justify-center">
                   <Image
                     src={product.images[0]}
                     alt={product.name}
@@ -77,28 +84,26 @@ export default function FeaturedProductsSection({ products }: FeaturedProductsSe
                 <p className="text-xs text-gray-600 mb-2 line-clamp-2">{product.description}</p>
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-500 line-through">
-                    R$ {product.price.toFixed(2)}
+                  R$ {product.price.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2  })}
                   </span>
-                  <span className="text-sm font-bold">
-                    R$ {(product.price * (1 - (product.offer / 100))).toFixed(2)}
-                  </span>
-                  <span className="text-xs font-semibold text-green-600">
-                    {product.offer}% OFF
-                  </span>
-                  <span className="text-xs text-green-600">
-                    {product.shipping== '' ? 'Frete Grátis' : 'Frete R$ 10,00'}
-                  </span>
+                  <div className="flex items-center space-x-1">
+                    <span className="text-sm font-bold">
+                    R$ {(product.price * (1 - product.offer / 100)).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2  })}
+                    </span>
+                    <span className="text-xs font-semibold text-green-600">
+                      {product.offer}%OFF
+                    </span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
+          ))}        </div>
         <Button
           variant="outline"
           size="icon"
           className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1/2 bg-white"
           onClick={prevProduct}
-          aria-label="Previous product" 
+          aria-label="Previous product"
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>

@@ -7,8 +7,8 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <div className="flex flex-col items-center mb-4">
+          <div className="flex flex-col justify-items-center md:items-start text-center md:text-left">
+            <div className="w-full justify-items-center mb-4">
               <Info className="w-8 h-8 text-gray-700" />
               <h2 className="text-xl font-semibold mt-2">Sobre</h2>
             </div>
@@ -21,7 +21,7 @@ export default function Footer() {
           </div>
           
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <div className="flex flex-col items-center mb-4">
+            <div className="w-full justify-items-center mb-4">
               <Phone className="w-8 h-8 text-gray-700" />
               <h2 className="text-xl font-semibold mt-2">Contato</h2>
             </div>
@@ -43,7 +43,7 @@ export default function Footer() {
           </div>
           
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <div className="flex flex-col items-center mb-4">
+            <div className="w-full justify-items-center mb-4">
               <Lock className="w-8 h-8 text-gray-700" />
               <h2 className="text-xl font-semibold mt-2">Política de Privacidade</h2>
             </div>

@@ -5,7 +5,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const searchQuery = req.headers['x-search-query'];
         console.log(searchQuery)
         try {
-            const response = await fetch(`http://127.0.0.1:8080/product/s?k=${searchQuery}`, {
+            const API_URL = process.env.API_BASE_URL;
+            const response = await fetch(`${API_URL}/product/s?k=${searchQuery}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -15,7 +16,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             if (response.ok) {
                 res.status(200).json(data);
-                console.log(data);
             } else {
                 res.status(response.status).json({ message: data.message });
             }

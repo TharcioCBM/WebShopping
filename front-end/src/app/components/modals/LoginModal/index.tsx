@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+//import { useRouter } from 'next/navigation';
 import Wrapper from '../../wrappers/ModalWrappers';
 import CloseButton from '../../common/ClosedButton';
 import InputField from '../../common/InputField';
 import ActionButton from '../../common/ActionButton';
+import { useAuth } from '@/app/contexts/AuthContext';
 
 interface LoginModalProps {
   onClose: () => void;
@@ -11,7 +12,8 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => {
-  const router = useRouter();
+  //const router = useRouter();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -24,22 +26,20 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => 
     setError('');
 
     try {
-      const res = await fetch('api/auth/login', {
+      const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       });
 
+      const data = await res.json();
+      
       if (res.ok) {
-        const data = await res.json();
-        localStorage.setItem('token', data.token);
-        router.push('/');
-        console.log(data.message);
+        login(data.token, data);
+        onClose();
       } else {
-        const errorData = await res.json();
-        setError(errorData.error_message || 'Usuário e/ou senha inválidos');
+        setError(data.error_message || 'Usuário e/ou senha inválidos');
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError('Erro ao conectar ao servidor.');
     } finally {
@@ -60,7 +60,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => 
         <InputField
           id="username"
           label="Usuário"
-          placeholder="ex.: tercio@email.com"
+          placeholder="ex.: tercio"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -104,5 +104,4 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onRegisterClick }) => 
     </Wrapper>
   );
 };
-
 export default LoginModal;
